@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock %} 
+
+
+{% block content %}
+
+    <!--  DATA SUBMITTED TO THE SERVER THROUGH A POST REQUEST TO THE /login PATH -->
+    <div class="form-block">
+        <form action="{{ url_for('auth.login') }}" method="post">  
+
+            <h1>LOG IN</h1>
+
+            <!-- Both email or username are valid for logging in -->
+            <div class="input-text">
+                <input type="email" name="email" placeholder="Email" required/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <div class="input-text">
+                <input type="password" name="password" placeholder="Password" required/>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            
+            <button type="submit" class="loginButton">LOG IN</button>
+
+            <!-- If any error or success message, defined in auth.py-->
+            {% with messages  = get_flashed_messages() %} 
+                {% for message in messages %} 
+                    <div class = "notification">{{message}}</div>
+                {%endfor%} 
+            {%endwith%}
+            
+            <div class="signup">
+                <p> Don't have an account? <a href="{{ url_for('auth.signup') }} "> SIGN UP </a></p>
+            </div>
+
+        </form>
+    </div>
+
+{% endblock %}
+

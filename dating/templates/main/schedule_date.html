@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='schedule_date.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<a class="nav-button" id="back" href="{{ url_for('main.other_profile', user_id=other_user.id)}}">
+    <i class="fa-solid fa-circle-left"></i>
+</a>
+
+<div class="schedule-date-container">
+    <h1>Schedule a Date with {{ other_user.profile.name }}</h1>
+
+    <!-- Calendar to pick a date -->
+    <div id="date-picker" class="calendar-container">
+        <label for="selected-date" class="calendar-label">Pick a Date:</label>
+        <input type="date" id="selected-date" min="{{ current_date }}" class="calendar-input">
+    </div>
+
+    <!-- Available restaurants -->
+    <div id="available-restaurants" data-user-id="{{ other_user.id }}" class="restaurants-container">
+        <h2>Available Restaurants</h2>
+        <div id="restaurant-list" class="restaurant-list"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/rest_date_av.js') }}"></script>
+{% endblock %}
+
+
+

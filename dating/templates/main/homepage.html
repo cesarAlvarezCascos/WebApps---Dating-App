@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home_page.css') }}">
+{% endblock %} 
+
+{% block content %}
+<!-- Header -->
+<div class="header">
+    <h1 class="title">PANDORA</h1>
+
+    <div id="manageDateContainer" class="manage-date-container">
+        <a class="nav-button" id="manageDateButton" href = "{{ url_for('main.manage_dates') }}">
+            <i class="icon-button fas fa-calendar-plus"></i> Manage Date
+        </a>
+    </div>
+
+    <div class="right-buttons">
+        <a class="nav-button" id="myprofile" href="{{ url_for('main.myprofile')}}"> <i class="fa-solid fa-user nav-icon"></i> </a> 
+    </div>
+</div>
+
+<div class="title-container">
+    <h2>Discover Profiles</h2>
+    <button class="toggle-button" id="toggleViewButton" onclick="toggleView()">Show All</button>
+</div>
+
+<!-- Profile Card -->
+<div class="profiles-container">
+    <div class="profiles-grid">
+        {% for user in matches %}
+        <div class="profile-card">
+            <!-- Make the profile info clickable -->
+            <a href="{{ url_for('main.other_profile', user_id=user.id) }}">
+                <div class="profile-picture">
+                    {% if user.profile and user.profile.photos %}
+                        {% set main_photo = user.profile.photos|selectattr('is_profile_photo', 'equalto', True)|list %}
+                        {% if main_photo %}
+                            <img src="{{ url_for('static', filename='img/photo-' + main_photo[0].id|string + '.' + main_photo[0].file_extension) }}" alt="{{ user.username }}'s Photo">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='img/default.jpg') }}" alt="Default Photo">
+                        {% endif %}
+                    {% else %}
+                        <img src="{{ url_for('static', filename='img/default.jpg') }}" alt="Default Photo">
+                    {% endif %}
+                </div>
+                <!-- Profile Info -->
+                <h3>{{ user.profile.name }} {{ user.profile.lastname }}</h3>
+                <p>Age: {{ user.age }}</p>
+                <p>Gender: {{ user.gender.name if user.gender else 'Not specified' }}</p>
+            </a>
+            <!-- Actions (Like Button) -->
+            <div class="actions">
+                <button class="like-button" data-user-id="{{ user.id }}"><i class="fas fa-heart nav-icon"></i> Like</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %} 
+<script src="{{ url_for('static', filename='js/homepage.js') }}"></script>
+
+{% endblock %}

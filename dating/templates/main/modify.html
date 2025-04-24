@@ -1,0 +1,135 @@
+{% extends 'main.html' %}
+
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock %} 
+
+{% block content %}
+
+<div class="form-block2">
+
+    <a class="nav-button" id="back" href="{{ url_for('main.myprofile') }}">
+        <i class="fa-solid fa-circle-left"></i>
+    </a>
+
+    <form action="{{ url_for('main.modify') }}" method="post" enctype="multipart/form-data"> 
+
+        <h2>Modify Your Profile</h2>
+
+        <div class="input-text2">
+            <label>Profile Picture:</label>
+            <label for="profile-pic"><i class="fa-regular fa-image photo-icon"></i></label>
+            {% for photo in current_user.profile.photos if photo.is_profile_photo %}
+            <img src="{{ url_for('static', filename='img/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}"
+                alt="Profile Picture" id="profile-pic-preview" class="preview-img">
+            {% endfor %}
+            <input type="file" name="profilepic" id="profile-pic" accept="image/jpg, image/jpeg, image/png"/>
+        </div>
+
+        <div class="input-text2">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" maxlength="64" value="{{ current_user.profile.name }}" required/>
+        </div>
+
+        <div class="input-text2">
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" id="lastname" maxlength="64" value="{{ current_user.profile.lastname }}" required/>
+        </div>
+
+        <div class="input-text2">
+            <label>Username:</label>
+            <input type="text" name="username" value="{{ current_user.username }}" required/>
+        </div>
+        
+        <div class="input-text2">
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ current_user.email }}" required/>
+        </div>
+
+        <div class="input-text2">
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" required>
+                <option value="Male" {% if current_user.gender.value == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if current_user.gender.value == 'Female' %}selected{% endif %}>Female</option>
+                <option value="Non_Binary" {% if current_user.gender.value == 'Non_Binary' %}selected{% endif %}>Non-Binary</option>
+                <option value="Other" {% if current_user.gender.value == 'Other' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        
+        <div class="input-text2">
+            <label for="birth">Year of Birth:</label>
+            <input type="number" name="birth" id="birth" min="1900" max="{{ current_year }}" value="{{ current_user.year_of_birth }}" required>
+        </div>
+
+        <div class="input-text2">
+            <label for="bio">Description:</label>
+            <textarea name="bio" id="bio" maxlength="700" placeholder="Tell us about yourself">{{ current_user.profile.bio or '' }}</textarea>
+        </div>
+
+        <div class="input-text2">
+            <label for="gender_interest">Who are you interested in?</label>
+            <fieldset required>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="gender_interest" value="Male"
+                        {% if 'Male' in current_user.matching_preferences.interested_in_genders %} checked {% endif %}/> Male
+                    </label>
+                    <label>
+                        <input type="checkbox" name="gender_interest" value="Female"
+                        {% if 'Female' in current_user.matching_preferences.interested_in_genders %} checked {% endif %}/> Female
+                    </label>
+                    <label>
+                        <input type="checkbox" name="gender_interest" value="Non_Binary"
+                        {% if 'Non_Binary' in current_user.matching_preferences.interested_in_genders %} checked {% endif %}/> Non-Binary
+                    </label>
+                    <label>
+                        <input type="checkbox" name="gender_interest" value="Other"
+                        {% if 'Other' in current_user.matching_preferences.interested_in_genders %} checked {% endif %}/> Other
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Age Range of Interest -->
+        <div class="input-text2">
+            <strong>Preferred Age Range:</strong>
+            <div>
+                <label for="min_age_diff">Age Difference (youngest):</label>
+                <input type="number" name="min_age_diff" id="min_age_diff" min="0" max="90" oninput="updateAgeRange()" value="{{ current_user.matching_preferences.min_age_diff}}" required/>
+                <small>Maximum age difference younger than you that you are interested in.</small>
+                <span id="youngest-age"></span>
+                <div id="age-warning"></div>
+            </div>
+            <div>
+                <label for="max_age_diff">Age Difference (oldest):</label>
+                <input type="number" name="max_age_diff" id="max_age_diff" min="0" max="90" oninput="updateAgeRange()" value="{{ current_user.matching_preferences.max_age_diff}}" required/>
+                <small>Maximum age difference older than you that you are interested in.</small>
+                <span id="oldest-age"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="loginButton">SAVE CHANGES</button>
+
+
+        {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <div class="notification">{{ message }}</div>
+                {% endfor %}
+        {% endwith %}
+
+        <div class="signup">
+            <p><a href="{{ url_for('auth.change_password') }} "> CHANGE PASSWORD </a></p>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %} 
+<script src="{{ url_for('static', filename='js/modify.js') }}"></script> 
+{% endblock %}
+
+

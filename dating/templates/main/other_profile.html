@@ -1,0 +1,132 @@
+{% extends 'main.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='other_profile.css') }}">
+{% endblock %} 
+
+{% block content %}
+
+<div class="header">
+    <a class="nav-button" id="home" href="{{ url_for('main.homepage')}}"> 
+        <i class="fa-solid fa-house nav-icon"></i> 
+    </a> 
+
+    <div class="manage-date">
+        <a class="nav-button" id="manageDate" href = "{{ url_for('main.manage_dates') }}">
+            <i class="icon-button fas fa-calendar-plus"></i> Manage Dates
+        </a>
+    </div>
+    
+    <div class="right-buttons">
+        <a class="nav-button" id="myprofile" href="{{ url_for('main.myprofile')}}"> 
+            <i class="fa-solid fa-user nav-icon"></i> 
+        </a> 
+    </div>
+</div>
+
+
+<section class="main-content">
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-photo">
+            {% if user.profile.photos %}
+                <!-- Display the main profile photo -->
+                {% for photo in user.profile.photos if photo.is_profile_photo %}
+                        <img src="{{ url_for('static', filename='img/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="Profile Photo">
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="profile-info">
+            <h1>{{ user.profile.name|upper }} {{ user.profile.lastname|upper }}</h1>
+            <h2><p class="age">{{ user.age }}, {{ user.gender.value.replace('_', '-') }}</p></h2>
+            <p class="bio">{{ user.profile.bio }}</p>
+        </div>
+    </section>
+
+    <div class="buttons-container">
+
+        <button class="nav-button" id = "likeButton" data-user-id = "{{user.id}}"
+        data-liked = "{{liked_user_ids}} "> 
+            <i class="fas fa-heart"></i> Like 
+        </button>
+
+        <button class="nav-button" id = "blockButton" data-user-id = "{{user.id}}"
+        data-blocked = "{{blocked_user_ids}} "> 
+            <i class="fas fa-ban"></i> Block 
+        </button> 
+
+
+        <div id="scheduleDateContainer" class="schedule-date-container hidden">
+            <a class="nav-button" id="scheduleDateButton" data-user-liking-ids="{{ other_user_liking_ids }}" 
+               data-logged-user-id="{{ logged_user.id }}" 
+               data-latest-proposal-status="{{ latest_proposal.status.name if latest_proposal else 'None' }}">
+                <i class="icon-button fas fa-calendar-plus"></i> Schedule Date
+            </a>
+        </div>
+        
+        <div id="manageDateContainer" class="manage-date-container">
+            {% if latest_proposal %}
+                <p>
+                    {% if (latest_proposal.status.name == 'proposed' and logged_user.id == latest_proposal.proposer_id) or (latest_proposal.status.name == 'ignored' and logged_user.id == latest_proposal.proposer_id) %}
+                        Your proposal has not been answered
+                    {% elif latest_proposal.status.name == 'rejected' and logged_user.id == latest_proposal.proposer_id %}
+                        Your proposal was rejected
+                    {% elif latest_proposal.status.name == 'accepted' and logged_user.id == latest_proposal.proposer_id %}
+                        Your proposal was accepted! Enjoy your date at {{ latest_proposal.restaurant_association.restaurant.name if latest_proposal.restaurant_association else 'the specified location' }}.
+                    {% elif latest_proposal.status.name == 'rejected' and logged_user.id == latest_proposal.recipient_id %}
+                        You rejected the proposal
+                    {% elif latest_proposal.status.name == 'accepted' and logged_user.id == latest_proposal.recipient_id %}
+                        You accepted the proposal!  Enjoy your date at {{ latest_proposal.restaurant_association.restaurant.name if latest_proposal.restaurant_association else 'the specified location' }}.
+                    {% elif latest_proposal.status.name == 'proposed' and logged_user.id == latest_proposal.recipient_id %}
+                        You received a proposal from {{ user.profile.name }}  
+                    {% endif %}
+
+                </p>
+            {% endif %}
+        </div>
+        
+        
+
+    </div>
+
+    
+
+
+    <!-- Extra Photos Section -->
+    <section class="user-photos">
+        <div class="user-photos-header">
+            <h3>PHOTOS:</h3>
+        </div>
+
+        <div class="photos-grid">
+            <!-- Display extra photos in blocks of 3 -->
+            {% for photo in user.profile.photos if not photo.is_profile_photo %}
+                
+                <img src="{{ url_for('static', filename='img/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="Extra Photo" class="clickable-photo" onclick="showFullPhoto(this)">
+                
+            {% else %}
+                <p>No additional photos.</p>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+</section>
+
+<!-- Full View -->
+<div id="fullPhotoBlock" class="full-photo">
+    <div class="full-photo-content">
+        <span class="close-button" onclick="hideFullPhoto()"><i class="fa-regular fa-circle-xmark"></i></span>
+        <img id="fullPhoto" src="" alt="Large View">
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %} 
+<script src="{{ url_for('static', filename='js/like_block.js') }}"></script> 
+<script src="{{ url_for('static', filename='js/addphoto.js') }}"></script> 
+{% endblock %}

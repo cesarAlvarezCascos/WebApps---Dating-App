@@ -1,0 +1,144 @@
+{% extends 'main.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='manage_dates.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="header">
+    <a class="nav-button" id="home" href="{{ url_for('main.homepage')}}">
+        <i class="fa-solid fa-house nav-icon"></i> 
+    </a> 
+
+    <div class="right-buttons">
+        <a class="nav-button" id="myprofile" href="{{ url_for('main.myprofile')}}"> 
+            <i class="fa-solid fa-user nav-icon"></i> 
+        </a> 
+    </div>
+</div>
+
+
+
+<div class="manage-dates-container">
+    <h1>Manage Your Dates</h1>
+    <div class="dates-sections">
+        <!-- Proposed Dates Section -->
+        <div class="dates-section proposed-dates">
+            <h2>Proposed Dates</h2>
+            <div class="filter-section">
+                <label for="proposed-filter">Filter by Status:</label>
+                <select id="proposed-filter" class="filter-dropdown">
+                    <option value="all">All</option>
+                    <option value="proposed">Proposed</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="reschedule">Reschedule</option>
+                </select>
+            </div>
+            <div class="scrollable-content">
+                <ul id="proposed-dates-list">
+                    {% for proposal in proposed_dates %}
+                    <li class="proposal-card {{ proposal.status.name|lower }}">
+                        <div class="user-info">
+                            {% if proposal.recipient.profile.photos %}
+                            <img src="{{ url_for('static', filename='img/photo-' ~ proposal.recipient.profile.photos[0].id ~ '.' ~ proposal.recipient.profile.photos[0].file_extension) }}" alt="Profile Photo" class="profile-photo">
+                            {% endif %}
+                            <div>
+                                <a href="{{ url_for('main.other_profile', user_id=proposal.recipient.id) }}" class="profile-link">
+                                    <strong>{{ proposal.recipient.profile.name }}</strong>
+                                </a>
+                                <p>{{ proposal.date.strftime('%Y-%m-%d') }}</p>
+                                <p>{{ proposal.restaurant_association.restaurant.name if proposal.restaurant_association else "No restaurant chosen" }}</p>
+                            </div>
+                        </div>
+                        <div class="message-section">
+                            <p class="message"><strong> Your message: </strong>  {{ proposal.proposal_message }}</p>
+                            {% if (proposal.status.name == "reschedule" or proposal.status.name == "accepted" or proposal.status.name  == "rejected" ) %}
+                            <p class="message"><strong> Response: </strong>  {{ proposal.response_message }}</p>
+                            {%endif%} 
+                            {% if proposal.status.name == "ignored" %}  
+                            <p class="status proposed">Proposed</p>
+                            {% else %} 
+                            <p class = "status {{ proposal.status.name|lower }}" > {{ proposal.status.name }}</p>
+                            {%endif %} 
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Received Dates Section -->
+        <div class="dates-section received-dates">
+            <h2>Received Dates</h2>
+            <div class="filter-section">
+                <label for="received-filter">Filter by Status:</label>
+                <select id="received-filter" class="filter-dropdown">
+                    <option value="all">All</option>
+                    <option value="proposed">Proposed</option>
+                    <option value="accepted">Accepted</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="ignored">Ignored</option>
+                    <option value="reschedule">Reschedule</option>
+                </select>
+            </div>
+            <div class="scrollable-content">
+                <ul id="received-dates-list">
+                    {% for proposal in received_dates %}
+                    {% if proposal.status.name != "ignored" %}
+                    <li class="proposal-card {{ proposal.status.name|lower }}">
+                        <div class="user-info">
+                            {% if proposal.proposer.profile.photos %}
+                            <img src="{{ url_for('static', filename='img/photo-' ~ proposal.proposer.profile.photos[0].id ~ '.' ~ proposal.proposer.profile.photos[0].file_extension) }}" alt="Profile Photo" class="profile-photo">
+                            {% endif %}
+                            <div>
+                                <a href="{{ url_for('main.other_profile', user_id=proposal.proposer.id) }}" class="profile-link">
+                                    <strong>{{ proposal.proposer.profile.name }}</strong>
+                                </a>
+                                <p>{{ proposal.date.strftime('%Y-%m-%d') }}</p>
+                                <p>{{ proposal.restaurant_association.restaurant.name if proposal.restaurant_association else "No restaurant chosen" }}</p>
+                            </div>
+                        </div>
+                        <div class="message-section">
+                            <p class="message"><strong>Message:</strong> {{ proposal.proposal_message }}</p>
+                            {% if proposal.status.name != "proposed" %} 
+                            <p class="message"><strong>Your response:</strong> {{ proposal.response_message }}</p>
+                            {%endif%} 
+                            <p class="status {{ proposal.status.name|lower }}">{{ proposal.status.name }}</p>
+                        </div>
+                        {% if proposal.status.name == "proposed" %}
+    <!-- Response Buttons -->
+    <form method="POST" action="{{ url_for('main.respond_to_proposal', proposal_id=proposal.id) }}" class="response-form">
+        <textarea name="response_message" placeholder="Write a response..." class="response-textarea"></textarea>
+        <div class="response-buttons">
+            <button type="submit" name="response" value="accepted" class="accept-button">Accept</button>
+            <button type="submit" name="response" value="rejected" class="reject-button">Reject</button>
+            <button type="submit" name="response" value="ignored" class="ignore-button">Ignore</button>
+            <button type="submit" name="response" value="reschedule" class="reschedule-button">Request Reschedule</button>
+        </div>
+    </form>
+{% endif %}
+
+
+
+
+                    </li> {%endif%} 
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% with messages  = get_flashed_messages() %} 
+                {% for message in messages %} 
+                    <div class = "notification">{{message}}</div>
+                {%endfor%} 
+            {%endwith%}
+{% endblock %}
+
+
+{% block scripts %} 
+<script src="{{ url_for('static', filename='js/filter_proposal.js') }}"></script> 
+{% endblock %}

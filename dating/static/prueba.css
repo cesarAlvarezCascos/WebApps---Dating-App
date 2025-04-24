@@ -1,0 +1,149 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #333;
+    color: #fff;
+}
+
+.nav-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.nav-button:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+/* Main container styles */
+.profile-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+/* Profile info styles */
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-pic img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-details h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.profile-details .name {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.profile-details .age, .profile-details .bio {
+    margin-top: 5px;
+}
+
+/* Posts section styles */
+.posts {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.posts h2 {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+    white-space: normal;
+}
+
+.post {
+    flex: 0 0 250px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.post p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Chat sidebar styles */
+.chat-sidebar {
+    background-color: #f8f8f8;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-chat p {
+    margin: 0;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    .posts {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+
+    .post {
+        flex: 1 0 auto;
+        width: 100%;
+    }
+}
+
+
+

@@ -1,0 +1,51 @@
+/* General styles */
+body {
+    /* background: linear-gradient(90deg, rgba(33,39,102,1) 0%, rgba(107,15,125,1) 100%); */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    background: url('./img/datedinner.jpg') no-repeat center center fixed; 
+    background-size: cover;
+}
+
+.title{
+    font-family: "Prompt", sans-serif;
+    color: white;
+    margin-left: 20px;
+} 
+
+footer {
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.flash-messages {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    width: 300px; /* Adjust as needed */
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.alert-error {
+    background-color: #dc3545; /* Red for errors */
+}
+
+.alert-success {
+    background-color: #28a745; /* Green for success */
+}
+
+
+

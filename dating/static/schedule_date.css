@@ -1,0 +1,125 @@
+
+.nav-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.nav-button:hover {
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.4);
+    /* filter: drop-shadow(0 -8mm 8mm rgb(136, 154, 237));
+    text-shadow: rgba(84,227,232,0.9) 0px 0px 48px; */
+    border-radius: 5px;
+}
+
+/* General container styles */
+.schedule-date-container {
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Calendar styles */
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.calendar-label {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.calendar-input {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Restaurants section */
+.restaurants-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.restaurant-list {
+    margin-top: 1rem;
+}
+
+.restaurant-list form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Radio buttons and labels */
+.restaurant-list div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.restaurant-list label {
+    font-size: 1rem;
+    color: #e0e7ff;
+}
+
+/* Submit button */
+button[type="submit"] {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background: #2563eb;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: #1e40af;
+}
+
+/* Textarea styles */
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 5px;
+    border: none;
+    resize: none;
+    font-size: 1rem;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+}
+
+
+

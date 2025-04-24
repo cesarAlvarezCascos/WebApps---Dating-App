@@ -1,0 +1,453 @@
+
+.notification{
+    border: 1px solid red;
+    border-radius: 4px;
+    background-color: rgba(225, 93, 93, 0.411);
+    text-align: center;
+    font-size: 16px;
+    color: rgb(212, 211, 211);
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+    margin-top: 10px;
+} 
+
+/* LOG IN PAGE */
+
+.form-block{
+    /* margin: 0; */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    font-family: "Prompt", sans-serif;
+
+    background: url('./img/datedinner.jpg');
+    background-size: cover;
+    background-position: center;
+
+    /* overflow: hidden; */
+} 
+
+.form-block form{
+    /* width:100%;
+    box-sizing: border-box; */
+
+    margin: 30px 0;
+
+    width: 420px;
+    color: antiquewhite;
+    padding: 30px 40px;
+
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px; */
+} 
+
+.form-block h1{
+    font-size: 36px;
+    text-align: center;
+} 
+
+.form-block .input-text{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    /* background-color: white; */
+    margin: 0;
+    margin-bottom: 20px;
+
+    display: flex; 
+    align-items: center;
+    /* gap: 10px; */
+} 
+
+.input-text input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;  /* More margin for the icon */
+
+    box-sizing: border-box;
+} 
+
+.input-text input::placeholder{
+    color: white;
+} 
+
+.input-text input:focus {
+    background-color: transparent;
+}
+
+.input-text i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+} 
+
+.form-block .loginButton{
+    width: 100%;
+    height: 45px;
+    background: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 16px;
+    color: rgb(29, 29, 29);
+    font-weight: 600;
+} 
+
+.loginButton:hover {
+    transform: scale(1.05);
+}
+
+.form-block .signup{
+    font-size: 15px;
+    text-align: center;
+    margin: 20px 0 15px;
+} 
+
+.signup p a{
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+} 
+
+.signup p a:hover{
+    text-decoration: underline;
+} 
+
+
+/* SIGNUP 1 PAGE */
+
+.input-label {
+    margin: 0;
+    display: block; 
+    width: 100%;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+}
+ 
+
+
+/* SIGNUP 2 PAGE */
+
+.form-block h2{
+    font-size: 28px;
+    text-align: center;
+} 
+
+
+.input-text2{
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+
+} 
+
+.input-text2 input{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 40px;
+    font-size: 18px;
+    color: white;
+    padding: 20px 20px 20px 20px;
+
+    box-sizing: border-box;
+} 
+
+.input-text2 input:focus {
+    background-color: transparent;
+}
+
+.input-text2 label {
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    margin: 0;
+    display: block;
+} 
+
+/* Preview profile picture */
+
+/* Hide original button */
+input[type="file"] {
+    display: none; 
+}
+
+.label[for="profile-pic"] {
+    color: white; 
+    padding: 5px 5px; 
+    margin-left: 15px;
+    font-size: 45px;
+    display: inline-block; 
+}
+
+label[for="profile-pic"]:hover {
+    color: black;
+}
+
+.photo-icon{
+    cursor: pointer;
+    font-size: 30px;
+} 
+
+.preview-img{
+    display: inline-block;
+    object-fit: cover;
+    
+    width: 150px;  
+    height: 150px;
+    box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+} 
+
+/* Gender */
+
+.input-text2 select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: rgba(180, 172, 172, 0.15);
+    color: #e2d6d6;
+    /* appearance: none;  */
+}
+
+.input-text2 select:focus {
+    outline: none;
+    background-color: rgba(173, 126, 126, 0.7);
+}
+
+.input-text2 select:hover {
+    border: 2px solid whitesmoke;
+}
+
+
+/*  Description */
+.input-text2 textarea{
+    width: 100%; 
+    resize: none; 
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    padding-top: 10px;
+    padding-left: 15px;
+    box-sizing: border-box;
+    vertical-align: middle;
+} 
+
+.input-text2 textarea::placeholder{
+    color: white;
+} 
+
+/* Interested In Genders */
+
+fieldset {
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    padding: 10px 10px;
+    background-color: rgba(255, 255, 255, 0.1); 
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+fieldset label {
+    font-size: 14px;
+    color: white; 
+    display: flex;
+    align-items: center; 
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px; 
+    accent-color: green; 
+    transform: scale(1.4);
+}
+
+input[type="checkbox"]:hover {
+    transform: scale(1.6); 
+    transition: transform 0.2s ease; 
+}
+
+input[type="checkbox"]:checked {
+    background-color: green; 
+}
+
+/*  Age Range */
+
+small{
+    font-weight: 500;
+    color:white;
+    width: 100%;
+
+    display: block;
+    text-align: center;
+} 
+
+label[for="min_age_diff"] {
+    font-weight: 500; 
+    font-size: 14.5px;
+}
+label[for="max_age_diff"] {
+    font-weight: 500; 
+    font-size: 14.5px;
+}
+
+#age-warning{
+    display: inline-block;
+    border: 1px solid rgb(196, 37, 37);
+    border-radius: 4px;
+    background-color: rgba(225, 93, 93, 0.5);
+    text-align: center;
+    font-size: 16px;
+    color: rgb(212, 211, 211);
+    text-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
+    width: 75%;
+    margin: 0 auto; 
+} 
+
+
+/*  MODIFY */
+
+.nav-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+.nav-button:hover {
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+}
+
+
+
+.form-block2{
+    /* margin: 0; */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    font-family: "Prompt", sans-serif;
+
+    background: rgba(0, 0, 0, 0.187);
+    background-size: cover;
+    background-position: center;
+
+    /* overflow: hidden; */
+} 
+
+.form-block2 form{
+    /* width:100%;
+    box-sizing: border-box; */
+
+    margin: 30px 0;
+
+    width: 420px;
+    color: antiquewhite;
+    padding: 30px 40px;
+
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    /* gap: 15px; */
+} 
+
+.form-block2 h1{
+    font-size: 36px;
+    text-align: center;
+} 
+
+.form-block2 .input-text{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    /* background-color: white; */
+    margin: 0;
+    margin-bottom: 20px;
+
+    display: flex; 
+    align-items: center;
+    /* gap: 10px; */
+} 
+
+
+.form-block2 .loginButton{
+    width: 100%;
+    height: 45px;
+    background: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 16px;
+    color: rgb(29, 29, 29);
+    font-weight: 600;
+} 
+
+.form-block2 .signup{
+    font-size: 15px;
+    text-align: center;
+    margin: 20px 0 15px;
+} 
+
+.nav-button#back{
+    position: absolute;
+    top: 30px; 
+    left: 20px;
+} 
+
+/*  CHANGE PASSWORD VIEW */

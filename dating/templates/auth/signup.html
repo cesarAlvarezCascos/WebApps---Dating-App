@@ -1,0 +1,55 @@
+{% extends 'main.html' %}
+
+{% block additional_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+{% endblock %} 
+
+{% block content %}
+
+        
+    <div class="form-block">
+        <form action="{{ url_for('auth.signup') }}" method ="post">
+
+            <h1>SIGN UP</h1>
+
+            <label class="input-label">Email:</label>
+            <div class="input-text">
+                <input type="email" name="email" required/>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+
+            <label class="input-label">Username:</label>
+            <div class="input-text">
+                <input type="text" name="username" required/>
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <label class="input-label">Password:</label>
+            <div class="input-text">
+                <input type="password" name="password" required/>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <label class="input-label">Repeat password: </label>
+            <div class="input-text">
+                <input type="password" name="password_repeat" required/>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            
+            <button type="submit" class="loginButton">SIGN UP</button>
+
+            {% with messages  = get_flashed_messages() %} 
+                {% for message in messages %} 
+                    <div class = "notification">{{message}}</div>
+                {%endfor%} 
+            {%endwith%} 
+
+            <div class="signup">
+                <p> Already have an account? <a href="{{ url_for('auth.login') }} ">LOG IN</a></p>  
+            </div>
+
+
+        </form>
+    </div>
+   
+{% endblock %}
